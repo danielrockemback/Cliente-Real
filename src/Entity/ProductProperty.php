@@ -6,7 +6,7 @@ use App\Repository\ProductPropertyRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProductPropertyRepository::class)]
-class ProductProperty
+class  ProductProperty
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
