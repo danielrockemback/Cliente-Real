@@ -1,4 +1,8 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <div class="mb-3">
+        <label for="{{ form.title.vars.id }}" class="form-label">Título</label>
+        {{ form_widget(form.title, {'attr':{'class':'form-control'}}) }}
+        <div id="emailHelp" class="form-text">Informe o título da propriedade.</div>
+    </div>
+    <button class="btn btn-info float-start text-white">Salvar</button>
 {{ form_end(form) }}
