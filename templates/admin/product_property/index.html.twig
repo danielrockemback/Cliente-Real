@@ -3,32 +3,40 @@
 {% block title %}ProductProperty index{% endblock %}
 
 {% block body %}
-    <h1>Propriedades dos produtos</h1>
+    <div class="row text-end">
+        <div class="col mb-3">
+            <a href="{{ path('app_admin_product_property_new') }}" type="button" class="btn btn-success text-white">Novo</a>
+        </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Título</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for product_property in product_properties %}
-            <tr>
-                <td>{{ product_property.id }}</td>
-                <td>{{ product_property.title }}</td>
-                <td>
-                    <a class="btn btn-primary float-end" href="{{ path('app_admin_product_property_edit', {'id': product_property.id}) }}" type="button" >Editar</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">Sem registros...</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a ></a>
-    <a href="{{ path('app_admin_product_property_new') }}" type="button" class="btn btn-success text-white">Novo</a>
-
+    </div>
+    <div class="card mb-5">
+        <h5 class="card-header">
+            Propriedades dos produtos
+        </h5>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th colspan="3">Título</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for product_property in product_properties %}
+                    <tr>
+                        <td>{{ product_property.title }}</td>
+                        <td>
+                            <a class="btn btn-primary float-end"
+                               href="{{ path('app_admin_product_property_edit', {'id': product_property.id}) }}"
+                               type="button">Editar</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">Sem registros...</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}
