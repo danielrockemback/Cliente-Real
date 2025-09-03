@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% set languagesEnum = enum('LanguageEnum') %}
+
+{% block title %}Lista das edições de SEO das páginas{% endblock %}
+
+{% block body %}
+    <h1>Lista das edições de SEO das páginas</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idioma</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for page_seo in page_seos %}
+            <tr>
+                <td>{{ languagesEnum.getFlag(page_seo.language)|raw }}</td>
+                <td>
+                    <a href="{{ path('app_admin_page_seo_edit', {'id': page_seo.id}) }}">editar</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="15">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
