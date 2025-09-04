@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ContactFormUrlPost{% endblock %}
+
+{% block body %}
+    <h1>ContactFormUrlPost</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ contact_form_url_post.id }}</td>
+            </tr>
+            <tr>
+                <th>Url</th>
+                <td>{{ contact_form_url_post.url }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_contact_form_url_post_index') }}">back to list</a>
+
+    <a href="{{ path('app_admin_contact_form_url_post_edit', {'id': contact_form_url_post.id}) }}">edit</a>
+
+    {{ include('admin/contact_form_url_post/_delete_form.html.twig') }}
+{% endblock %}
