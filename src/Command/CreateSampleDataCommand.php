@@ -4,8 +4,10 @@ namespace App\Command;
 
 use App\Entity\Enum\LanguageEnum;
 use App\Entity\GeneralData;
+use App\Entity\GlobalTags;
 use App\Entity\PageSeo;
 use App\Repository\GeneralDataRepository;
+use App\Repository\GlobalTagsRepository;
 use App\Repository\PageSeoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -23,6 +25,7 @@ class CreateSampleDataCommand extends Command
     public function __construct(
         private GeneralDataRepository $generalDataRepository,
         private PageSeoRepository $pageSeoRepository,
+        private GlobalTagsRepository $globalTagsRepository,
         private EntityManagerInterface $entityManager,
     )
     {
@@ -51,7 +54,7 @@ class CreateSampleDataCommand extends Command
             $this->entityManager->persist($generalData);
             $this->entityManager->flush();
         } else {
-            $io->writeln("<comment>Já existe um registro na tabela General Data</comment>");
+            $io->writeln("<comment>Já existe registro na tabela General Data</comment>");
         }
 
 
@@ -59,7 +62,7 @@ class CreateSampleDataCommand extends Command
             $pageSeo = $this->pageSeoRepository->findBy(['language' => $value]);
 
             if (!$pageSeo) {
-                $io->writeln("Criando Page SEO em: {$language}");
+                $io->writeln("Criando Page SEO em: <info>{$language}</info>");
 
                 $pageSeo = new PageSeo();
                 $pageSeo->setHomePageTitle('Home');
@@ -85,6 +88,23 @@ class CreateSampleDataCommand extends Command
         }
 
         $this->entityManager->flush();
+
+        $globalTags = $this->globalTagsRepository->findAll();
+
+        if (!$globalTags) {
+            $io->writeln("<info>Criando Global Tags</info>");
+
+            $globalTags = new GlobalTags();
+            $globalTags->setGa4('GA4');
+            $globalTags->setPixelMetaAds('Pixel Meta Ads');
+            $globalTags->setTagsGoogleAds('Google Ads');
+
+            $this->entityManager->persist($globalTags);
+            $this->entityManager->flush();
+
+        } else {
+            $io->writeln("<comment>Já existe registro na tabela Global Tags</comment>");
+        }
 
         return Command::SUCCESS;
     }
