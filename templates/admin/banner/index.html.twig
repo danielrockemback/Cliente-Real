@@ -71,9 +71,17 @@
                                 <span class="badge badge-sm bg-danger ms-auto mt-2">Inativo</span>
                             {% endif %}
                         </td>
+
                         <td class="text-center">{{ banner.position }}</td>
-                        <td class="text-center">{{ banner.image }}</td>
+
+                        <td class="text-center">
+                            {% if banner.imageFile is not null %}
+                                <img src="{{ vich_uploader_asset(banner, 'imageFile') }}" width="75px">
+                            {% endif %}
+                        </td>
+
                         <td class="text-center">{{ banner.title }}</td>
+
                         <td class="text-center">
                             <a class="btn btn-primary"
                                href="{{ path('app_admin_banner_edit', {'id': banner.id}) }}">

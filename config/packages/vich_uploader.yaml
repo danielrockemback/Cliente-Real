@@ -1,0 +1,13 @@
+vich_uploader:
+    db_driver: orm
+
+    metadata:
+        type: attribute
+
+
+    mappings:
+        bannerImage:
+            uri_prefix: /images/bannerImage
+            upload_destination: '%kernel.project_dir%/public/images/bannerImage'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            inject_on_load: true

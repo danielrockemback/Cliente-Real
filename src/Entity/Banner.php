@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\BannerRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: BannerRepository::class)]
+#[Vich\Uploadable]
 class Banner
 {
     #[ORM\Id]
@@ -30,6 +33,34 @@ class Banner
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
+
+    #[Vich\UploadableField(mapping: 'bannerImage', fileNameProperty: "image")]
+    private ?File $imageFile = null;
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile): void
+    {
+        $this->imageFile = $imageFile;
+        $this->imageUpdatedAt = new \DateTimeImmutable();
+    }
+
+    public function getImageUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->imageUpdatedAt;
+    }
+
+    public function setImageUpdatedAt(?\DateTimeImmutable $imageUpdatedAt): void
+    {
+        $this->imageUpdatedAt = $imageUpdatedAt;
+    }
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $imageUpdatedAt = null;
+
 
     public function getId(): ?int
     {

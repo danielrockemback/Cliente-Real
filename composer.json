@@ -21,7 +21,8 @@
         "symfony/security-csrf": "6.4.*",
         "symfony/twig-bundle": "6.4.*",
         "symfony/validator": "6.4.*",
-        "symfony/yaml": "6.4.*"
+        "symfony/yaml": "6.4.*",
+        "vich/uploader-bundle": "^2.8"
     },
     "require-dev": {
         "symfony/maker-bundle": "^1.64",
@@ -72,7 +73,7 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
+            "allow-contrib": true,
             "require": "6.4.*",
             "docker": true
         }
