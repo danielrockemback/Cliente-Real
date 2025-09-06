@@ -11,13 +11,40 @@
 </div>
 
 <div class="mb-3">
+    <label for="{{ form.imageFileOne.vars.id }}" class="form-label">Imagem - 1</label>
+    {{ form_widget(form.imageFileOne) }}
+
+    {% if who_we_are_page.imageOne  %}
+        <img class="mt-3" src="{{ vich_uploader_asset(who_we_are_page, 'imageFileOne') }}" width="150px">
+    {% endif %}
+</div>
+
+<div class="mb-3">
     <label for="{{ form.presentationPartTwo.vars.id }}" class="form-label">Apresentação - Parte 2</label>
     {{ form_widget(form.presentationPartTwo, {'attr':{'class':'form-control', 'rows':'6'}}) }}
 </div>
 
 <div class="mb-3">
+    <label for="{{ form.imageFileTwo.vars.id }}" class="form-label">Imagem - 2</label>
+    {{ form_widget(form.imageFileTwo) }}
+
+    {% if who_we_are_page.imageTwo  %}
+        <img class="mt-3" src="{{ vich_uploader_asset(who_we_are_page, 'imageFileTwo') }}" width="150px">
+    {% endif %}
+</div>
+
+<div class="mb-3">
     <label for="{{ form.presentationPartThree.vars.id }}" class="form-label">Apresentação - Parte 3</label>
     {{ form_widget(form.presentationPartThree, {'attr':{'class':'form-control', 'rows':'6'}}) }}
+</div>
+
+<div class="mb-3">
+    <label for="{{ form.imageFileThree.vars.id }}" class="form-label">Imagem - 3</label>
+    {{ form_widget(form.imageFileThree) }}
+
+    {% if who_we_are_page.imageThree  %}
+        <img class="mt-3" src="{{ vich_uploader_asset(who_we_are_page, 'imageFileThree') }}" width="150px">
+    {% endif %}
 </div>
 
 <label for="{{ form.youTubeVideoCode.vars.id }}" class="form-label">Código do YouTube</label>

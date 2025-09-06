@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class WhoWeArePageType extends AbstractType
 {
@@ -17,7 +18,35 @@ class WhoWeArePageType extends AbstractType
             ->add('presentationPartOne')
             ->add('presentationPartTwo')
             ->add('presentationPartThree')
-            ->add('youTubeVideoCode');
+            ->add('youTubeVideoCode')
+            ->add('imageFileOne', VichImageType::class, [
+                'required'      => false,
+                'allow_delete'  => false,
+                'asset_helper'  => false,
+                'image_uri'     => false,
+                'download_uri'  => true,
+                'download_label'=> false,
+            ])
+            ->add('imageFileTwo', VichImageType::class, [
+                'required'      => false,
+                'allow_delete'  => false,
+                'asset_helper'  => false,
+                'image_uri'     => false,
+                'download_uri'  => true,
+                'download_label'=> false,
+            ])
+            ->add('imageFileThree', VichImageType::class, [
+                'required'      => false,
+                'allow_delete'  => false,
+                'asset_helper'  => false,
+                'image_uri'     => false,
+                'download_uri'  => true,
+                'download_label'=> false,
+            ])
+
+
+
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

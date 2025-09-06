@@ -33,9 +33,15 @@ class Banner
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
-
     #[Vich\UploadableField(mapping: 'bannerImage', fileNameProperty: "image")]
     private ?File $imageFile = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $imageUpdatedAt = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $language = null;
+
 
     public function getImageFile(): ?File
     {
@@ -57,13 +63,6 @@ class Banner
     {
         $this->imageUpdatedAt = $imageUpdatedAt;
     }
-
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $imageUpdatedAt = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?int $language = null;
-
 
     public function getId(): ?int
     {
