@@ -29,10 +29,8 @@ enum LanguageEnum: int
         return $languagesDescription[$idLanguage];
     }
 
-    public static function getFlag(?int $idLanguage)
+    public static function getFlag(?int $idLanguage): string
     {
-        $baseUrl = 'public/assets/flags/';
-
         $languagesDescription = [
             self::PORTUGUESE->value => '<div class="d-none">pt</div><img src="/assets/images/flags/br.svg" width="20"> Português',
             self::SPANISH->value =>  '<div class="d-none">es</div><img src="/assets/images/flags/es.svg" width="20"> Espanhol',

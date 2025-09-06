@@ -1,0 +1,31 @@
+{% set languagesEnum = enum('LanguageEnum') %}
+
+
+{{ form_start(form) }}
+
+<div class="mt-3 mb-3">Idioma em: {{ languagesEnum.getFlag(who_we_are_page.language)|raw }}</div>
+
+<div class="mb-3">
+    <label for="{{ form.presentationPartOne.vars.id }}" class="form-label">Apresentação - Parte 1</label>
+    {{ form_widget(form.presentationPartOne, {'attr':{'class':'form-control', 'rows':'6'}}) }}
+</div>
+
+<div class="mb-3">
+    <label for="{{ form.presentationPartTwo.vars.id }}" class="form-label">Apresentação - Parte 2</label>
+    {{ form_widget(form.presentationPartTwo, {'attr':{'class':'form-control', 'rows':'6'}}) }}
+</div>
+
+<div class="mb-3">
+    <label for="{{ form.presentationPartThree.vars.id }}" class="form-label">Apresentação - Parte 3</label>
+    {{ form_widget(form.presentationPartThree, {'attr':{'class':'form-control', 'rows':'6'}}) }}
+</div>
+
+<label for="{{ form.youTubeVideoCode.vars.id }}" class="form-label">Código do YouTube</label>
+<div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon3">https://youtube.com/watch?v=/</span>
+    {{ form_widget(form.youTubeVideoCode, {'attr':{'class':'form-control'}}) }}
+</div>
+
+<button class="btn btn-info float-start text-white">Salvar</button>
+
+{{ form_end(form) }}

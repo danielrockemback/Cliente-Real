@@ -7,10 +7,12 @@ use App\Entity\Enum\LanguageEnum;
 use App\Entity\GeneralData;
 use App\Entity\GlobalTags;
 use App\Entity\PageSeo;
+use App\Entity\WhoWeArePage;
 use App\Repository\ContactFormUrlPostRepository;
 use App\Repository\GeneralDataRepository;
 use App\Repository\GlobalTagsRepository;
 use App\Repository\PageSeoRepository;
+use App\Repository\WhoWeArePageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -29,6 +31,7 @@ class CreateSampleDataCommand extends Command
         private PageSeoRepository $pageSeoRepository,
         private GlobalTagsRepository $globalTagsRepository,
         private ContactFormUrlPostRepository $contactFormUrlPostRepository,
+        private WhoWeArePageRepository $whoWeArePageRepository,
         private EntityManagerInterface $entityManager,
     )
     {
@@ -122,6 +125,27 @@ class CreateSampleDataCommand extends Command
 
         } else {
             $io->writeln("<comment>Já existe registro na tabela Contact Form Url Post</comment>");
+        }
+
+        foreach (LanguageEnum::getOptions() as $language => $value) {
+            $whoWeArePage = $this->whoWeArePageRepository->findBy(['language' => $value]);
+
+            if (!$whoWeArePage) {
+                $io->writeln("Criando Quem Somos em: <info>{$language}</info>");
+                $whoWeArePage = new WhoWeArePage();
+                $whoWeArePage->setPresentationPartOne('Presentation Part One');
+                $whoWeArePage->setPresentationPartTwo('Presentation Part Two');
+                $whoWeArePage->setPresentationPartThree('Presentation Part Three');
+                $whoWeArePage->setYouTubeVideoCode('www.youtube.com/watch?v=whoWeArePage');
+                $whoWeArePage->setLanguage($value);
+
+                $this->entityManager->persist($whoWeArePage);
+                $this->entityManager->flush();
+
+            } else {
+                $io->writeln("Quem Somos em: {$language} <comment>já está cadastrado...</comment>");
+            }
+
         }
 
         return Command::SUCCESS;

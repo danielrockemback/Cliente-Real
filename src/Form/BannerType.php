@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Banner;
+use App\Entity\Enum\LanguageEnum;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,14 +27,15 @@ class BannerType extends AbstractType
             ->add('url')
             ->add('imageFile', VichImageType::class, [
                 'required'      => false,
-                'allow_delete'  => false, // não mostra checkbox para deletar
-                'asset_helper'  => false, // se usar Asset component, pode deixar true
-                'image_uri'     => false,  // mostra a imagem atual
-                'download_uri'  => true,  // mostra link para download
-                'download_label'=> false, // texto do link
+                'allow_delete'  => false,
+                'asset_helper'  => false,
+                'image_uri'     => false,
+                'download_uri'  => true,
+                'download_label'=> false,
             ])
-
-        ;
+        ->add('language', ChoiceType::class, [
+            'choices'  => LanguageEnum::getOptions(),
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
