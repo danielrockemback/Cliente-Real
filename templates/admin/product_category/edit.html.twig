@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Categoria do Produto{% endblock %}
+
+{% block body %}
+    <h1>Editar Categoria do Produto</h1>
+
+    {{ include('admin/product_category/_form.html.twig') }}
+
+    <a class="btn btn-secondary float-start ms-3" href="{{ path('app_admin_news_category_index') }}">Voltar</a>
+
+    {{ include('admin/product_category/_delete_form.html.twig') }}
+{% endblock %}
