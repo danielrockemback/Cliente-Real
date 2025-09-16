@@ -42,14 +42,6 @@ final class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_admin_product_show', methods: ['GET'])]
-    public function show(Product $product): Response
-    {
-        return $this->render('admin/product/show.html.twig', [
-            'product' => $product,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'app_admin_product_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {

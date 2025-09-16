@@ -2,7 +2,7 @@
 
 {% set languagesEnum = enum('LanguageEnum') %}
 
-{% block title %}Lista de propriedades de produtos{% endblock %}
+{% block title %}Valor da Propriedade do Produto{% endblock %}
 
 {% block javascripts %}
     <script
@@ -40,7 +40,7 @@
 
     <div class="row text-end">
         <div class="col mb-3">
-            <a href="{{ path('app_admin_product_property_new') }}"
+            <a href="{{ path('app_admin_product_property_value_new') }}"
                type="button"
                class="btn btn-success text-white">Novo</a>
         </div>
@@ -48,25 +48,30 @@
 
     <div class="card mb-5">
         <h5 class="card-header">
-            Propriedades dos produtos
+            Valor da Propriedade do Produto
         </h5>
         <div class="card-body">
             <table class="table" id="tabela">
                 <thead>
-                <tr>
-                    <th class="text-center">Título</th>
-                    <th class="text-center">Idioma</th>
-                    <th class="text-center">Editar</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for product_property in product_properties %}
                     <tr>
-                        <td>{{ product_property.title }}</td>
+                        <th class="text-center">Produto</th>
+                        <th class="text-center">Propriedade</th>
+                        <th class="text-center">Valor</th>
+                        <th class="text-center">Idioma</th>
+                        <th class="text-center"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                {% for product_property in product_property_values %}
+                    <tr>
+                        <td class="text-center">{{ product_property.product.title }}</td>
+                        <td class="text-center">{{ product_property.productProperty.title }}</td>
+                        <td class="text-center">{{ product_property.value }}</td>
                         <td class="text-center">{{ languagesEnum.getFlag(product_property.language)|raw }}</td>
                         <td class="text-center">
                             <a class="btn btn-primary"
-                               href="{{ path('app_admin_product_property_edit', {'id': product_property.id}) }}">
+                               href="{{ path('app_admin_product_property_value_edit', {'id': product_property.id}) }}">
                                 Editar
                             </a>
                         </td>

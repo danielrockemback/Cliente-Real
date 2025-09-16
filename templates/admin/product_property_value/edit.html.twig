@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Propriedade do Produto{% endblock %}
+
+{% block body %}
+    <h1>Editar Propriedade do Produto</h1>
+
+    {{ include('admin/product_property_value/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a class="btn btn-secondary float-start ms-3" href="{{ path('app_admin_product_property_value_index') }}">Voltar</a>
+
+    {{ include('admin/product_property_value/_delete_form.html.twig') }}
+{% endblock %}
