@@ -48,7 +48,7 @@
 
     <div class="card mb-5">
         <h5 class="card-header">
-            Categorias de notícias
+            Listagem de Produtos
         </h5>
         <div class="card-body">
             <table class="table" id="tabela">
@@ -79,8 +79,10 @@
                         </td>
                         <td class="text-center">{{ languagesEnum.getFlag(product.language)|raw }}</td>
                         <td class="text-center">
-                            <a class="btn btn-primary"
-                               href="{{ path('app_admin_product_edit', {'id': product.id}) }}">
+                            <a class="btn btn-success ms-2 text-white" href="{{ path('app_admin_product_property_value_index', {'productId': product.id}) }}">
+                                Propriedades
+                            </a>
+                            <a class="btn btn-primary" href="{{ path('app_admin_product_edit', {'id': product.id}) }}">
                                 Editar
                             </a>
                         </td>

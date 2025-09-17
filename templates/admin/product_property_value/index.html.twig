@@ -38,9 +38,12 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.3/css/dataTables.dataTables.css" />
     <script src="https://cdn.datatables.net/2.3.3/js/dataTables.js"></script>
 
+    <h1>{{ product.title }}</h1>
+    <h5>Propriedades do produto</h5>
+
     <div class="row text-end">
         <div class="col mb-3">
-            <a href="{{ path('app_admin_product_property_value_new') }}"
+            <a href="{{ path('app_admin_product_property_value_new', {'productId': product.id}) }}"
                type="button"
                class="btn btn-success text-white">Novo</a>
         </div>
@@ -71,7 +74,7 @@
                         <td class="text-center">{{ languagesEnum.getFlag(product_property.language)|raw }}</td>
                         <td class="text-center">
                             <a class="btn btn-primary"
-                               href="{{ path('app_admin_product_property_value_edit', {'id': product_property.id}) }}">
+                               href="{{ path('app_admin_product_property_value_edit', {'id': product_property.id, 'productId': product.id}) }}">
                                 Editar
                             </a>
                         </td>
@@ -81,4 +84,6 @@
             </table>
         </div>
     </div>
+
+    <a class="btn btn-secondary" href="{{ path('app_admin_product_index') }}">Ver produtos</a>
 {% endblock %}
