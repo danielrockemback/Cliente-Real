@@ -51,7 +51,9 @@ class Banner
     public function setImageFile(?File $imageFile): void
     {
         $this->imageFile = $imageFile;
-        $this->imageUpdatedAt = new \DateTimeImmutable();
+        if (null !== $imageFile) {
+            $this->imageUpdatedAt = new \DateTimeImmutable();
+        }
     }
 
     public function getImageUpdatedAt(): ?\DateTimeImmutable

@@ -2,7 +2,6 @@
 
 namespace App\Controller\admin;
 
-use App\Entity\Product;
 use App\Entity\ProductPropertyValue;
 use App\Form\ProductPropertyValueType;
 use App\Repository\ProductPropertyValueRepository;

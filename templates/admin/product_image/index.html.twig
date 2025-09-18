@@ -2,7 +2,7 @@
 
 {% set languagesEnum = enum('LanguageEnum') %}
 
-{% block title %}Lista de Produtos{% endblock %}
+{% block title %}Imagens do Produto{% endblock %}
 
 {% block javascripts %}
     <script
@@ -38,9 +38,12 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.3/css/dataTables.dataTables.css" />
     <script src="https://cdn.datatables.net/2.3.3/js/dataTables.js"></script>
 
+    <h1>{{ product.title }}</h1>
+    <h5>Imagens do Produto</h5>
+
     <div class="row text-end">
         <div class="col mb-3">
-            <a href="{{ path('app_admin_product_new') }}"
+            <a href="{{ path('app_admin_product_image_new', {'productId': product.id}) }}"
                type="button"
                class="btn btn-success text-white">Novo</a>
         </div>
@@ -48,44 +51,34 @@
 
     <div class="card mb-5">
         <h5 class="card-header">
-            Listagem de Produtos
+            Imagens do Produto
         </h5>
         <div class="card-body">
             <table class="table" id="tabela">
                 <thead>
-                <tr>
-                    <th class="text-center">Status</th>
-                    <th class="text-center">Título</th>
-                    <th class="text-center">Imagem</th>
-                    <th class="text-center">Idioma</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for product in products %}
                     <tr>
+                        <th class="text-center">Produto</th>
+                        <th class="text-center">Imagem</th>
+                        <th class="text-center">Título</th>
+                        <th class="text-center">Alt</th>
+                        <th class="text-center"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                {% for product_image in product_images %}
+                    <tr>
+                        <td class="text-center">{{ product_image.product.title }}</td>
                         <td class="text-center">
-                            {% if product.status %}
-                                <span class="badge badge-sm bg-success ms-auto mt-2">Ativo</span>
-                            {% else %}
-                                <span class="badge badge-sm bg-danger ms-auto mt-2">Inativo</span>
+                            {% if product_image.imageFile is not null %}
+                                <img src="{{ vich_uploader_asset(product_image, 'imageFile') }}" width="75px">
                             {% endif %}
                         </td>
-                        <td class="text-center">{{ product.title }}</td>
+                        <td class="text-center">{{ product_image.imageTitle }}</td>
+                        <td class="text-center">{{ product_image.imageAlt }}</td>
                         <td class="text-center">
-                            {% if product.imageFile is not null %}
-                                <img src="{{ vich_uploader_asset(product, 'imageFile') }}" width="75px">
-                            {% endif %}
-                        </td>
-                        <td class="text-center">{{ languagesEnum.getFlag(product.language)|raw }}</td>
-                        <td class="text-center">
-                            <a class="btn btn-success ms-2 text-white" href="{{ path('app_admin_product_property_value_index', {'productId': product.id}) }}">
-                                Propriedades
-                            </a>
-                            <a class="btn btn-success ms-2 text-white" href="{{ path('app_admin_product_image_index', {'productId': product.id}) }}">
-                                Imagens
-                            </a>
-                            <a class="btn btn-primary ms-2" href="{{ path('app_admin_product_edit', {'id': product.id}) }}">
+                            <a class="btn btn-primary"
+                               href="{{ path('app_admin_product_image_edit', {'id': product_image.id, 'productId': product.id}) }}">
                                 Editar
                             </a>
                         </td>
@@ -95,4 +88,6 @@
             </table>
         </div>
     </div>
+
+    <a class="btn btn-secondary" href="{{ path('app_admin_product_index') }}">Ver produtos</a>
 {% endblock %}

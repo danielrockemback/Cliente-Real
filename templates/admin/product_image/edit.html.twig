@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Imagem do Produto{% endblock %}
+
+{% block body %}
+    <h1>{{ product.title }}</h1>
+    <h5>Editar Imagem do Produto</h5>
+    <hr>
+
+    {{ include('admin/product_image/_form.html.twig') }}
+
+    <a class="btn btn-secondary float-start ms-3" href="{{ path('app_admin_product_index', {'productId':product.id}) }}">Voltar</a>
+
+    {{ include('admin/product_image/_delete_form.html.twig') }}
+{% endblock %}
