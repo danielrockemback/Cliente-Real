@@ -57,10 +57,8 @@
             <table class="table" id="tabela">
                 <thead>
                     <tr>
-                        <th class="text-center">Produto</th>
                         <th class="text-center">Propriedade</th>
                         <th class="text-center">Valor</th>
-                        <th class="text-center">Idioma</th>
                         <th class="text-center"></th>
                     </tr>
                 </thead>
@@ -68,10 +66,8 @@
                 <tbody>
                 {% for product_property in product_property_values %}
                     <tr>
-                        <td class="text-center">{{ product_property.product.title }}</td>
                         <td class="text-center">{{ product_property.productProperty.title }}</td>
                         <td class="text-center">{{ product_property.value }}</td>
-                        <td class="text-center">{{ languagesEnum.getFlag(product_property.language)|raw }}</td>
                         <td class="text-center">
                             <a class="btn btn-primary"
                                href="{{ path('app_admin_product_property_value_edit', {'id': product_property.id, 'productId': product.id}) }}">

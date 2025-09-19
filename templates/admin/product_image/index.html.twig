@@ -39,7 +39,6 @@
     <script src="https://cdn.datatables.net/2.3.3/js/dataTables.js"></script>
 
     <h1>{{ product.title }}</h1>
-    <h5>Imagens do Produto</h5>
 
     <div class="row text-end">
         <div class="col mb-3">
@@ -57,7 +56,6 @@
             <table class="table" id="tabela">
                 <thead>
                     <tr>
-                        <th class="text-center">Produto</th>
                         <th class="text-center">Imagem</th>
                         <th class="text-center">Título</th>
                         <th class="text-center">Alt</th>
@@ -68,7 +66,6 @@
                 <tbody>
                 {% for product_image in product_images %}
                     <tr>
-                        <td class="text-center">{{ product_image.product.title }}</td>
                         <td class="text-center">
                             {% if product_image.imageFile is not null %}
                                 <img src="{{ vich_uploader_asset(product_image, 'imageFile') }}" width="75px">

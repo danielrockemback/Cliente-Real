@@ -26,12 +26,6 @@ class ProductManualType extends AbstractType
                 'download_uri'  => true,
                 'download_label'=> false,
             ])
-            ->add('product', EntityType::class, [
-                'class' => Product::class,
-                'choice_label' => function  (Product $product) {
-                    return $product->getTitle() . ' - ' . LanguageEnum::getDescription($product->getLanguage());
-                },
-            ])
         ;
     }
 
