@@ -2,30 +2,23 @@
 
 namespace App\Form;
 
-use App\Entity\Banner;
 use App\Entity\Enum\LanguageEnum;
+use App\Entity\Product;
+use App\Entity\ProductManual;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
-class BannerType extends AbstractType
+class ProductManualType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('title')
-            ->add('subTitle')
-            ->add('active',  ChoiceType::class, [
-                'choices'  => [
-                    'Inativo' => 0,
-                    'Ativo' => 1,
-                ]
-            ])
-            ->add('position')
-            ->add('url')
-            ->add('imageFile', VichImageType::class, [
+            ->add('description')
+            ->add('manualFile', VichImageType::class, [
                 'required'      => false,
                 'allow_delete'  => false,
                 'asset_helper'  => false,
@@ -33,15 +26,19 @@ class BannerType extends AbstractType
                 'download_uri'  => true,
                 'download_label'=> false,
             ])
-            ->add('language', ChoiceType::class, [
-                'choices'  => LanguageEnum::getOptions(),
-            ]);
+            ->add('product', EntityType::class, [
+                'class' => Product::class,
+                'choice_label' => function  (Product $product) {
+                    return $product->getTitle() . ' - ' . LanguageEnum::getDescription($product->getLanguage());
+                },
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Banner::class,
+            'data_class' => ProductManual::class,
         ]);
     }
 }
