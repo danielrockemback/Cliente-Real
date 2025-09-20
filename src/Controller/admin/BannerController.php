@@ -42,14 +42,6 @@ final class BannerController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_admin_banner_show', methods: ['GET'])]
-    public function show(Banner $banner): Response
-    {
-        return $this->render('admin/banner/show.html.twig', [
-            'banner' => $banner,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'app_admin_banner_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Banner $banner, EntityManagerInterface $entityManager): Response
     {
