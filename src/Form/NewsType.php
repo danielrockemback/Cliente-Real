@@ -50,8 +50,9 @@ class NewsType extends AbstractType
             ])
             ->add('category', EntityType::class, [
                 'class' => NewsCategory::class,
-                'choice_label' => 'id',
+                'choice_label' => 'title',
                 'multiple' => true,
+                'expanded' => true,
             ])
         ;
     }
