@@ -23,10 +23,6 @@
                     <a href="{{ path('app_admin_contact_form_url_post_edit', {'id': contact_form_url_post.id}) }}">edit</a>
                 </td>
             </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
         {% endfor %}
         </tbody>
     </table>
