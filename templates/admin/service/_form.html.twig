@@ -1,0 +1,76 @@
+{{ form_start(form) }}
+<div class="row">
+
+    <div class="mb-3 col col-6">
+        <label for="{{ form.title.vars.id }}" class="form-label">Título</label>
+        {{ form_widget(form.title, {'attr':{'class':'form-control'}}) }}
+    </div>
+
+    <div class="mb-3 col col-6">
+        <label for="{{ form.shortDescripton.vars.id }}" class="form-label">Chamada</label>
+        {{ form_widget(form.shortDescripton, {'attr':{'class':'form-control'}}) }}
+    </div>
+
+    <div class="mb-3 col col-12">
+        <label for="{{ form.fullDescription.vars.id }}" class="form-label">Descrição</label>
+        {{ form_widget(form.fullDescription, {'attr':{'class':'form-control editor'}}) }}
+    </div>
+
+    <div class="mb-3 col col-6">
+        <label for="{{ form.status.vars.id }}" class="form-label">Status</label>
+        {{ form_widget(form.status, {'attr':{'class':'form-control'}}) }}
+    </div>
+
+    <div class="mb-3 col col-6">
+        <label for="{{ form.highlighted.vars.id }}" class="form-label">Em Destaque ?</label>
+        {{ form_widget(form.highlighted, {'attr':{'class':'form-control'}}) }}
+    </div>
+
+    <div class="mb-3 col col-6">
+        <label for="{{ form.position.vars.id }}" class="form-label">Posição</label>
+        {{ form_widget(form.position, {'attr':{'class':'form-control'}}) }}
+    </div>
+
+    <div class="mb-3 col col-6">
+        <label for="{{ form.language.vars.id }}" class="form-label">Idioma</label>
+        {{ form_widget(form.language, {'attr':{'class':'form-control'}}) }}
+    </div>
+
+    <div class="mb-3 col col-6">
+        {% if service.image %}
+            <img class="mt-3" src="{{ vich_uploader_asset(service, 'imageFile') }}" width="150px">
+            <br>
+            <br>
+        {% endif %}
+        {{ form_widget(form.imageFile) }}
+
+    </div>
+
+</div>
+
+<script src="https://cdn.tiny.cloud/1/fgoswlkgkpmdzt0fcrpns1iaszu7uspeqxnd841096wuq5wp/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        menubar: false,
+        selector: 'textarea.editor',
+        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+        toolbar: 'undo redo | fontsize | bold italic underline strikethrough | numlist bullist | removeformat',
+    });
+</script>
+
+<style>
+    #news_category input[type='checkbox'] {
+        display: inline-block;
+        margin-right: 10px;
+        width: 3%;
+    }
+    #news_category label {
+        display: inline-block;
+        margin-right: 10px;
+        width: 90%;
+    }
+</style>
+
+
+<button class="btn btn-info float-start text-white">Salvar</button>
+{{ form_end(form) }}
