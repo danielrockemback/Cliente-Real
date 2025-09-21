@@ -42,13 +42,6 @@ final class NewsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_admin_news_show', methods: ['GET'])]
-    public function show(News $news): Response
-    {
-        return $this->render('admin/news/show.html.twig', [
-            'news' => $news,
-        ]);
-    }
 
     #[Route('/{id}/edit', name: 'app_admin_news_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, News $news, EntityManagerInterface $entityManager): Response

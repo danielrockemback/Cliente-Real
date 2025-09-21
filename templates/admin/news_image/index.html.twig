@@ -2,7 +2,7 @@
 
 {% set languagesEnum = enum('LanguageEnum') %}
 
-{% block title %}Lista de Notícias{% endblock %}
+{% block title %}Imagens do Produto{% endblock %}
 
 {% block javascripts %}
     <script
@@ -38,9 +38,11 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.3/css/dataTables.dataTables.css" />
     <script src="https://cdn.datatables.net/2.3.3/js/dataTables.js"></script>
 
+    <h1>{{ news.date|date('d/m/Y') }} - {{ news.title }}</h1>
+
     <div class="row text-end">
         <div class="col mb-3">
-            <a href="{{ path('app_admin_news_new') }}"
+            <a href="{{ path('app_admin_news_image_new', {'newsId': news.id}) }}"
                type="button"
                class="btn btn-success text-white">Novo</a>
         </div>
@@ -48,53 +50,32 @@
 
     <div class="card mb-5">
         <h5 class="card-header">
-            Lista de Notícias
+            Imagens da Notícia
         </h5>
         <div class="card-body">
             <table class="table" id="tabela">
                 <thead>
-                <tr>
-                    <th class="text-center">Mostrar no site</th>
-                    <th class="text-center">Destaque</th>
-                    <th class="text-center">Imagem</th>
-                    <th class="text-center">Título</th>
-                    <th class="text-center">Data</th>
-                    <th class="text-center">Idioma</th>
-                    <th></th>
-                </tr>
+                    <tr>
+                        <th class="text-center">Imagem</th>
+                        <th class="text-center">Título</th>
+                        <th class="text-center">Alt</th>
+                        <th class="text-center"></th>
+                    </tr>
                 </thead>
+
                 <tbody>
-                {% for new in news %}
+                {% for news_image in news_images %}
                     <tr>
                         <td class="text-center">
-                            {% if new.status %}
-                                <span class="badge badge-sm bg-success ms-auto mt-2">Ativo</span>
-                            {% else %}
-                                <span class="badge badge-sm bg-danger ms-auto mt-2">Inativo</span>
+                            {% if news_image.imageFile %}
+                                <img src="{{ vich_uploader_asset(news_image, 'imageFile') }}" width="75px">
                             {% endif %}
                         </td>
+                        <td class="text-center">{{ news_image.title }}</td>
+                        <td class="text-center">{{ news_image.alt }}</td>
                         <td class="text-center">
-                            {% if new.highlighted %}
-                                <span class="badge badge-sm bg-success ms-auto mt-2">Ativo</span>
-                            {% else %}
-                                <span class="badge badge-sm bg-danger ms-auto mt-2">Inativo</span>
-                            {% endif %}
-                        </td>
-                        <td class="text-center">
-                            {% if new.imageFile is not null %}
-                                <img src="{{ vich_uploader_asset(new, 'imageFile') }}" width="75px">
-                            {% endif %}
-                        </td>
-                        <td class="text-center">{{ new.title }}</td>
-                        <td class="text-center">{{ new.date|date('d/m/Y') }}</td>
-                        <td class="text-center">{{ languagesEnum.getFlag(new.language)|raw }}</td>
-                        <td class="text-center">
-                            <a class="btn btn-success text-white me-2"
-                               href="{{ path('app_admin_news_image_index', {'newsId': new.id}) }}">
-                                Imagem
-                            </a>
                             <a class="btn btn-primary"
-                               href="{{ path('app_admin_news_edit', {'id': new.id}) }}">
+                               href="{{ path('app_admin_news_image_edit', {'id': news_image.id, 'newsId': news.id}) }}">
                                 Editar
                             </a>
                         </td>
@@ -104,4 +85,6 @@
             </table>
         </div>
     </div>
+
+    <a class="btn btn-secondary" href="{{ path('app_admin_news_index') }}">Ver Notícias</a>
 {% endblock %}
