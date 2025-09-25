@@ -7,11 +7,13 @@ use App\Entity\Enum\LanguageEnum;
 use App\Entity\GeneralData;
 use App\Entity\GlobalTags;
 use App\Entity\PageSeo;
+use App\Entity\User;
 use App\Entity\WhoWeArePage;
 use App\Repository\ContactFormUrlPostRepository;
 use App\Repository\GeneralDataRepository;
 use App\Repository\GlobalTagsRepository;
 use App\Repository\PageSeoRepository;
+use App\Repository\UserRepository;
 use App\Repository\WhoWeArePageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -19,6 +21,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[AsCommand(
     name: 'app:create-sample-data',
@@ -33,6 +36,8 @@ class CreateSampleDataCommand extends Command
         private ContactFormUrlPostRepository $contactFormUrlPostRepository,
         private WhoWeArePageRepository $whoWeArePageRepository,
         private EntityManagerInterface $entityManager,
+        private UserPasswordHasherInterface $passwordHasher,
+        private UserRepository $userRepository,
     )
     {
         parent::__construct();
@@ -147,6 +152,28 @@ class CreateSampleDataCommand extends Command
             }
 
         }
+
+        $admin = $this->userRepository->findAll();
+
+        if (!$admin) {
+            $io->writeln("Admin <info>criado!!!</info>");
+
+            $user = new User();
+            $user->setEmail('admin@gmail.com.br');
+            $user->setRoles(['ROLE_ADMIN']);
+            $plaintextPassword = "abc123";
+
+            $hashedPassword = $this->passwordHasher->hashPassword($user, $plaintextPassword);
+            $user->setPassword($hashedPassword);
+
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+
+        } else {
+            $io->writeln("Admin <comment>já está existe...</comment>");
+        }
+
+        $io->success('Dados criado com sucesso!!!');
 
         return Command::SUCCESS;
     }

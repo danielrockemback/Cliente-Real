@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="Área Administrativa">
+    <title>{% block title %}Bem-vindo!{% endblock %}</title>
+
+    <link rel="stylesheet" href="/admin/css/vendors/simplebar.css">
+    <link href="/admin/css/style.css" rel="stylesheet">
+    <link href="/admin/css/examples.css" rel="stylesheet">
+    <script src="/admin/js/config.js"></script>
+    <script src="/admin/js/color-modes.js"></script>
+    <link href="/admin/vendors/@coreui/chartjs/css/coreui-chartjs.css" rel="stylesheet">
+
+    {% block stylesheets %}
+    {% endblock %}
+
+    {% block javascripts %}
+    {% endblock %}
+</head>
+
+<body>
+
+<div class="wrapper d-flex flex-column min-vh-100">
+
+    <div class="body flex-grow-1">
+        <div class="container-lg px-4">
+            {% block body %}{% endblock %}
+        </div>
+    </div>
+    <footer class="footer px-4">
+        <div>
+            <a href="https://coreui.io/demos/bootstrap/5.3/free/?theme=light">CoreUI </a>
+            <a href="https://coreui.io/product/free-bootstrap-admin-template/"></a>
+        </div>
+        <div class="ms-auto">Desenvolvido por: <a href="https://voce.com.br">Daniel Borges</a></div>
+    </footer>
+</div>
+<!-- CoreUI and necessary plugins-->
+<script src="vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
+<script src="vendors/simplebar/js/simplebar.min.js"></script>
+<script>
+    const header = document.querySelector('header.header');
+
+    document.addEventListener('scroll', () => {
+        if (header) {
+            header.classList.toggle('shadow-sm', document.documentElement.scrollTop > 0);
+        }
+    });
+</script>
+<!-- Plugins and scripts required by this view-->
+<script src="/admin/vendors/chart.js/js/chart.umd.js"></script>
+<script src="/admin/vendors/@coreui/chartjs/js/coreui-chartjs.js"></script>
+<script src="/admin/vendors/@coreui/utils/js/index.js"></script>
+<script src="/admin/js/main.js"></script>
+
+</body>
+</html>
