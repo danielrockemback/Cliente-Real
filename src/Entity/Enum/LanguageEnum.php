@@ -41,4 +41,13 @@ enum LanguageEnum: int
         return $languagesDescription[$idLanguage];
     }
 
+    public static function getAbbreviation(): array
+    {
+        return [
+            'pt' => self::PORTUGUESE->value,
+            'es' => self::SPANISH->value,
+            'en' => self::ENGLISH->value,
+        ];
+    }
+
 }
