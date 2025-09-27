@@ -5,6 +5,7 @@ namespace App\Controller\public;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Enum\LanguageEnum;
+
 class LanguageController extends BaseController
 {
     #[Route('/language/{language}', name: 'app_language')]
@@ -12,7 +13,7 @@ class LanguageController extends BaseController
     {
         $this->session->set('language', 'pt');
 
-        foreach (LanguageEnum::getAbbreviation() as $abbreviation => $value) {
+        foreach (LanguageEnum::getAbbreviations() as $abbreviation => $value) {
             if ($language === $abbreviation) {
                 $this->session->set('language', $language);
                 break;

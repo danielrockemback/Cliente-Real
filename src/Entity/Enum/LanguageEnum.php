@@ -34,20 +34,31 @@ enum LanguageEnum: int
         $languagesDescription = [
             self::PORTUGUESE->value => '<div class="d-none">pt</div><img src="/assets/images/flags/br.svg" width="20"> Português',
             self::SPANISH->value =>  '<div class="d-none">es</div><img src="/assets/images/flags/es.svg" width="20"> Espanhol',
-            self::ENGLISH->value =>  '<div class="d-none">uk</div><img src="/assets/images/flags/uk.svg" width="20"> Inglês',
+            self::ENGLISH->value =>  '<div class="d-none">en</div><img src="/assets/images/flags/uk.svg" width="20"> Inglês',
             '' => ''
         ];
 
         return $languagesDescription[$idLanguage];
     }
 
-    public static function getAbbreviation(): array
+    public static function getAbbreviations(): array
     {
         return [
             'pt' => self::PORTUGUESE->value,
             'es' => self::SPANISH->value,
             'en' => self::ENGLISH->value,
         ];
+    }
+
+    public static function getValueAbbreviation($abbreviation): string
+    {
+        $languagesDescription = [
+            'pt' =>  self::PORTUGUESE->value,
+            'es' =>  self::SPANISH->value,
+            'en' =>  self::ENGLISH->value,
+        ];
+
+        return $languagesDescription[$abbreviation];
     }
 
 }
