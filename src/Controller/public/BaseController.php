@@ -37,7 +37,7 @@ class BaseController extends AbstractController
 
         $this->session = New Session();
 
-        if ($this->session->get('language') === null) {
+        if (!$this->session->has('language')) {
             $this->session->set('language', 'pt');
         }
 

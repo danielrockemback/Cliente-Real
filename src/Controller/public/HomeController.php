@@ -7,6 +7,7 @@ use App\Repository\BannerRepository;
 use App\Repository\FinancingRepository;
 use App\Repository\NewsRepository;
 use App\Repository\ProductCategoryRepository;
+use App\Repository\ProductRepository;
 use App\Repository\TestimonyRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -73,24 +74,32 @@ final class HomeController extends BaseController
     }
 
     #[Route('/produtos', name: 'app_products', methods: ['GET'])]
-    public function products(): Response
+    public function products(ProductRepository $productRepository): Response
     {
+        $languageId = $this->getLanguageId();
+        $products = $productRepository->findBy(['status' => 1, 'language' => $languageId]);
+
         return $this->render('public/product/products.html.twig', [
             'pageSeo' => $this->pageSeo,
             'generalData' => $this->generalData,
             'globalTags' => $this->globalTags,
-            'urlToPostForm' => $this->urlToPostForm
+            'urlToPostForm' => $this->urlToPostForm,
+            'products' => $products
         ]);
     }
 
     #[Route('/produto/{slug}', name: 'app_product_detail', methods: ['GET'])]
-    public function product($slug): Response
+    public function product($slug, ProductRepository $productRepository): Response
     {
+
+        $product = $productRepository->findOneBy(['slug' => $slug]);
+
         return $this->render('public/product/product-detail.html.twig', [
             'pageSeo' => $this->pageSeo,
             'generalData' => $this->generalData,
             'globalTags' => $this->globalTags,
-            'urlToPostForm' => $this->urlToPostForm
+            'urlToPostForm' => $this->urlToPostForm,
+            'product' => $product
         ]);
     }
 
